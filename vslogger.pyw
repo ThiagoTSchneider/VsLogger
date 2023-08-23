@@ -15,12 +15,23 @@ class MyHandler(FileSystemEventHandler):
          if event.src_path.endswith(".py"):
             autorun()
 
+def get_startup_folder():
+   key = reg.HKEY_CURRENT_USER
+   subkey = r"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
+   value_name = "Startup"
+   with reg.OpenKey(key, subkey) as startup_key:
+      return reg.QueryValueEx(startup_key, value_name)[0]
+
 def autorun():
    
-   if not os.path.exists(r"C:\Users\Thiago Schneider\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup/vslogger.pyw") or os.path.getmtime(__file__) > os.path.getmtime(r"C:\Users\Thiago Schneider\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup/vslogger.pyw"):
-      shutil.copy(__file__, r"C:\Users\Thiago Schneider\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup/vslogger.pyw")
+   script_name = "vslogger.pyw"
+   startup_folder = get_startup_folder()
+   startup_script_path = os.path.join(startup_folder, script_name)
+
+   if not os.path.exists(startup_script_path) or os.path.getmtime(__file__) > os.path.getmtime(startup_script_path):
+      shutil.copy(__file__, startup_script_path)
       print("Copiando Arquivo para o Startup!\n")
-      update_register(r"C:\Users\Thiago Schneider\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup/vslogger.pyw")
+      update_register(startup_script_path)
    else:
       print("Arquivo já existe!\n")
 
