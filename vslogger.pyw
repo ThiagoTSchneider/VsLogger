@@ -1,4 +1,4 @@
-from AppOpener import open
+
 import keyboard
 import os
 import shutil
@@ -37,15 +37,13 @@ def autorun():
 
    open_app()
 
-def update_register(script_path):
+def update_register(startup_script_path):
    try:
-      command = f'reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "On_Spirit" /t REG_SZ /d "{script_path}" /f'
+      command = f'reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "On_Spirit" /t REG_SZ /d "{startup_script_path}" /f'
       subprocess.run(command, shell=True, check=True)
-      print("Registrando Inicialização adcionada no Registro!\n")
+      print("Registrando Inicialização no Registro!\n")
    except subprocess.CalledProcessError as e:
       print(f"Erro ao registrar o arquivo!\n {e}")
-
-
 
 def open_app():
     time.sleep(2)
@@ -54,7 +52,9 @@ def open_app():
     while True:
      keyboard.read_event()
      if keyboard.is_pressed('ctrl+home'):
-      open("Visual Studio Code", print("Abrindo Visual Studio Code!\n"))
+        os.system("start code")
+        time.sleep(2)
+        os.system("taskkill /im cmd.exe")
 
 if __name__ == "__main__":
     observer = Observer()
