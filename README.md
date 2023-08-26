@@ -2,7 +2,7 @@
 VsLogger
 
 
-> pip install appopener
+> pip install AppOpener
 
 > pip install watchdog
 
