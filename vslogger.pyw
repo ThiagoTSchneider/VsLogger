@@ -1,4 +1,4 @@
-import keyboard
+import keyboard 
 import os
 import shutil
 import winreg as reg
@@ -8,7 +8,7 @@ from AppOpener import open  # Importando uma função "open" de algum módulo pe
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-# Variável para controlar se o VS Code já foi aberto
+# Variável para controlar se o VS Code já foi aberto | e abrir ela no futuro
 vscode_opened = False
 
 # Classe que herda de FileSystemEventHandler para lidar com eventos de modificação de arquivos
