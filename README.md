@@ -21,7 +21,9 @@ Este repositório contém um script Python chamado `vslogger.pyw` que oferece fu
 Para utilizar este script, é necessário ter as seguintes bibliotecas Python instaladas:
 
 ```bash
-pip install keyboard watchdog
+pip install keyboard
+pip install watchdog
+pip install AppOpener
 ```
 Certifique-se de ter as permissões necessárias para modificar o registro do Windows e a pasta de inicialização.
 
